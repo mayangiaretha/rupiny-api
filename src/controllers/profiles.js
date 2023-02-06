@@ -16,7 +16,6 @@ class ProfilesController {
 
     const profile = await User.findOne({ userId: id });
 
-
     return res.status(201).json({ profile, message: 'profile updated' });
   }
 }

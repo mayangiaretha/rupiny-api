@@ -2,7 +2,7 @@ import { Router } from 'express';
 import asyncMiddleware from '../../middleware/async';
 import verifiedToken from '../../middleware/auth';
 // import validate from '../../middleware/validate';
-import ProfilesController from "../../controllers/profiles";
+import ProfilesController from '../../controllers/profiles';
 
 const router = Router();
 
