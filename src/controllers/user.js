@@ -23,9 +23,20 @@ class UserController {
       viewedArticle: Math.floor(Math.random() * 10000),
       likes: Math.floor(Math.random() * 10000),
     });
-    await User.create(newUser);
+    const createdUser = await User.create(newUser);
+    const { userId, _id } = createdUser;
+
+    const token = jwt.sign(
+      {
+        userId,
+        userName,
+        _id,
+      },
+      process.env.TOKEN_SECRET
+    );
     return res.status(201).json({
-      newUser,
+      createdUser,
+      token,
       message: 'user successfully created',
     });
   }
@@ -41,12 +52,15 @@ class UserController {
       {
         userId: loggedIn.userId,
         userName,
+        _id: loggedIn._id,
       },
       process.env.TOKEN_SECRET
     );
-    return res.headers('access-token', token).json({
+
+    return res.cookie('access-token', token).status(200).json({
       token,
-      message: 'ypu have successfully logged in',
+      httpOnly: true,
+      message: 'you have successfully logged in',
     });
   }
 }

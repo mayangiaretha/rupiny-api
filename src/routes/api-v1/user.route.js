@@ -15,4 +15,5 @@ router.post(
   validate.login,
   asyncMiddleware(UserController.loginUser)
 );
+
 export default router;
