@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import dayjs from 'dayjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import User from '../model/user';
+import User from '../model/users';
 
 class UserController {
   static async registerAUser(req, res) {
@@ -57,9 +57,8 @@ class UserController {
       process.env.TOKEN_SECRET
     );
 
-    return res.cookie('access-token', token).status(200).json({
+    return res.header('access-token', token).status(200).json({
       token,
-      httpOnly: true,
       message: 'you have successfully logged in',
     });
   }
