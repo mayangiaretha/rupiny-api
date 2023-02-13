@@ -1,45 +1,22 @@
 import { Router } from 'express';
 import asyncMiddleware from '../../middleware/async';
 import verifiedToken from '../../middleware/auth';
-// import validate from '../../middleware/validate';
+import validate from '../../middleware/validate';
 import ProfilesController from '../../controllers/profiles';
 
 const router = Router();
 
-router.get(
-  '/find/:id',
+router.post(
+  '/',
   verifiedToken,
-  asyncMiddleware(ProfilesController.getAUser)
+  asyncMiddleware(ProfilesController.createAProfile)
 );
-router.put(
-  '/sub/:id',
-  verifiedToken,
-  asyncMiddleware(ProfilesController.subscribe)
-);
-router.put(
-  '/unsub/:id',
-  verifiedToken,
-  asyncMiddleware(ProfilesController.unsubscribe)
-);
-router.put(
-  '/like/:articleId',
-  verifiedToken,
-  asyncMiddleware(ProfilesController.like)
-);
-router.put(
-  '/dislike/articleId',
-  verifiedToken,
-  asyncMiddleware(ProfilesController.dislike)
-);
+
 router.put(
   '/:id',
   verifiedToken,
+  validate.profiled,
   asyncMiddleware(ProfilesController.updatedAUser)
-);
-router.delete(
-  '/id',
-  verifiedToken,
-  asyncMiddleware(ProfilesController.deleteAUser)
 );
 
 export default router;

@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import User from '../model/users';
+import Profiles from '../model/profiles';
 
 class UserController {
   static async registerAUser(req, res) {
@@ -20,11 +21,18 @@ class UserController {
       password: encryptedPassword,
       email,
       createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
-      viewedArticle: Math.floor(Math.random() * 10000),
-      likes: Math.floor(Math.random() * 10000),
     });
+
     const createdUser = await User.create(newUser);
+
     const { userId, _id } = createdUser;
+
+    const newProfile = new Profiles({
+      profileId: uuidv4(),
+      createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+      userId: _id,
+    });
+    await Profiles.create(newProfile);
 
     const token = jwt.sign(
       {
