@@ -6,10 +6,12 @@ import ProfilesController from '../../controllers/profiles';
 
 const router = Router();
 
-router.post(
-  '/',
+router.get('/',ProfilesController.getAllProfiles)
+
+router.get(
+  '/:id',
   verifiedToken,
-  asyncMiddleware(ProfilesController.createAProfile)
+  asyncMiddleware(ProfilesController.getAProfile)
 );
 
 router.put(
