@@ -1,12 +1,14 @@
 import express from 'express';
 import connect from './db/db';
+import cors from 'cors';
 import { errors } from 'celebrate';
 import router from './routes';
 
 const app = express();
 const { PORT } = process.env || 4000;
-
 connect();
+
+app.use(cors());
 app.use(express.json());
 app.use(router);
 

@@ -13,4 +13,10 @@ export default class validate {
       password: Joi.string().min(8).required(),
     }),
   });
+  static profiled = celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      userName: Joi.string(),
+      email: Joi.string().email(),
+    }),
+  });
 }

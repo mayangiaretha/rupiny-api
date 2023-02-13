@@ -24,8 +24,6 @@ let userElements = {
     type: String,
     required: false,
   },
-  viewedArticle: Number,
-  likes: Number,
 };
 const UserSchema = new mongoose.Schema({
   ...userElements,

@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt';
 import dayjs from 'dayjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import User from '../model/user';
+import User from '../model/users';
+import Profiles from '../model/profiles';
 
 class UserController {
   static async registerAUser(req, res) {
@@ -20,12 +21,30 @@ class UserController {
       password: encryptedPassword,
       email,
       createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
-      viewedArticle: Math.floor(Math.random() * 10000),
-      likes: Math.floor(Math.random() * 10000),
     });
-    await User.create(newUser);
+
+    const createdUser = await User.create(newUser);
+
+    const { userId, _id } = createdUser;
+
+    const newProfile = new Profiles({
+      profileId: uuidv4(),
+      createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+      userId: _id,
+    });
+    await Profiles.create(newProfile);
+
+    const token = jwt.sign(
+      {
+        userId,
+        userName,
+        _id,
+      },
+      process.env.TOKEN_SECRET
+    );
     return res.status(201).json({
-      newUser,
+      createdUser,
+      token,
       message: 'user successfully created',
     });
   }
@@ -41,12 +60,14 @@ class UserController {
       {
         userId: loggedIn.userId,
         userName,
+        _id: loggedIn._id,
       },
       process.env.TOKEN_SECRET
     );
-    return res.headers('access-token', token).json({
+
+    return res.header('access-token', token).status(200).json({
       token,
-      message: 'ypu have successfully logged in',
+      message: 'you have successfully logged in',
     });
   }
 }
