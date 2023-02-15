@@ -6,7 +6,7 @@ import ProfilesController from '../../controllers/profiles';
 
 const router = Router();
 
-router.get('/',ProfilesController.getAllProfiles)
+router.get('/', ProfilesController.getAllProfiles);
 
 router.get(
   '/:id',
