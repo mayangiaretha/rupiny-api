@@ -5,10 +5,8 @@ import { errors } from 'celebrate';
 import router from './routes';
 
 const app = express();
-const { PORT } = process.env || 4000;
-connect();
-
 app.use(cors());
+connect();
 app.use(express.json());
 app.use(router);
 
@@ -19,6 +17,7 @@ app.use((req, res) => {
   });
 });
 app.use(errors());
+const { PORT } = process.env || 4000;
 app.listen(PORT, () =>
   console.log(`server running on port:http://localhost:${PORT}`)
 );
