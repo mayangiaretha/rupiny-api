@@ -3,12 +3,13 @@ import Profiles from '../model/profiles';
 import User from '../model/users';
 
 class ProfilesController {
+  //For internal use only
   static async getAllProfiles(req, res) {
     const allProfiles = await Profiles.find().populate({
       path: 'userId',
       model: 'user',
     });
-    if (!allProfiles.length === 0) {
+    if (allProfiles.length === 0) {
       return res.status(200).json({ message: 'there are no profiles' });
     }
     return res.json(allProfiles);

@@ -8,6 +8,10 @@ import Profiles from '../model/profiles';
 class UserController {
   static async registerAUser(req, res) {
     const { userName, email, password } = req.body;
+    const user = await User.findOne({ userName });
+    if (user) {
+      return res.status(400).json({ message: 'userName already in use' });
+    }
     const oldUser = await User.findOne({ email });
     if (oldUser) {
       return res.status(400).json({ message: 'user already exist' });
@@ -51,8 +55,11 @@ class UserController {
   static async loginUser(req, res) {
     const { password, userName } = req.body;
     const loggedIn = await User.findOne({ userName });
+    console.log(loggedIn, 'the loggedin user ==========>');
     if (!loggedIn)
-      return res.status(400).json({ message: 'userName already in use' });
+      return res
+        .status(400)
+        .json({ message: 'user does not exist. Check your username' });
     const checkPassword = await bcrypt.compare(password, loggedIn.password);
     if (!checkPassword)
       return res.status(400).json({ message: 'invalid password' });
