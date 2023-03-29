@@ -33,9 +33,9 @@ class ArticlesController {
   }
 
   static async getArticleWithId(req, res) {
-    const { _id } = req.params;
+    const { id } = req.params;
 
-    const oneArticle = await Article.findOne({ author: _id });
+    const oneArticle = await Article.findOne({ articleId: id });
     if (!oneArticle) {
       return res.status(400).json({ message: 'this article doesnt exist' });
     }

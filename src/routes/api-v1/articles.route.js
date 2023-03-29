@@ -7,11 +7,7 @@ const router = Router();
 router.get('/', ArticlesController.getAllArticles);
 router.post('/', verifiedToken, ArticlesController.postAnArticle);
 
-router.get(
-  '/:id',
-  verifiedToken,
-  asyncMiddleware(ArticlesController.getArticleWithId)
-);
+router.get('/:id', asyncMiddleware(ArticlesController.getArticleWithId));
 
 router.put(
   '/:id',

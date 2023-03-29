@@ -32,8 +32,6 @@ class ProfilesController {
     const { _id } = req.params;
 
     const { body } = req;
-    console.log(req.body);
-
     const updatedProfile = {
       ...body,
       updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),

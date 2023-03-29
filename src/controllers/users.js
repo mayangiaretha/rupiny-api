@@ -55,7 +55,6 @@ class UserController {
   static async loginUser(req, res) {
     const { password, userName } = req.body;
     const loggedIn = await User.findOne({ userName });
-    console.log(loggedIn, 'the loggedin user ==========>');
     if (!loggedIn)
       return res
         .status(400)
