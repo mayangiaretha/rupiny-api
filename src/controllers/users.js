@@ -28,8 +28,7 @@ class UserController {
     });
 
     const createdUser = await User.create(newUser);
-
-    const { userId, _id } = createdUser;
+    const { userId, _id, createdAt } = createdUser;
 
     const newProfile = new Profiles({
       profileId: uuidv4(),
@@ -46,8 +45,13 @@ class UserController {
       },
       process.env.TOKEN_SECRET
     );
+
     return res.status(201).json({
-      createdUser,
+      createdUser: {
+        username: userName,
+        userId,
+        createdAt,
+      },
       token,
       message: 'user successfully created',
     });
