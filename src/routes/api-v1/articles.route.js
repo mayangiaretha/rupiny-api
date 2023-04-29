@@ -18,10 +18,11 @@ router.get('/:id', asyncMiddleware(ArticlesController.getArticleWithId));
 router.put(
   '/:id',
   verifiedToken,
+  validate.articles,
   asyncMiddleware(ArticlesController.updateAnArticle)
 );
 
-router.put(
+router.delete(
   '/:id',
   verifiedToken,
   asyncMiddleware(ArticlesController.deleteAnArticle)
