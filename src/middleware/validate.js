@@ -23,7 +23,6 @@ export default class validate {
     [Segments.BODY]: Joi.object().keys({
       title: Joi.string().min(8).required(),
       description: Joi.string().required(),
-
     }),
   });
 }
