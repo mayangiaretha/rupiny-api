@@ -35,7 +35,10 @@ class ArticlesController {
   static async getArticleWithId(req, res) {
     const { id } = req.params;
 
-    const oneArticle = await Article.findOne({ articleId: id });
+    const oneArticle = await Article.findOne({ articleId: id }).populate({
+      path: 'author',
+      model: 'user',
+    });;
     if (!oneArticle) {
       return res.status(400).json({ message: 'this article doesnt exist' });
     }
