@@ -44,11 +44,11 @@ class ArticlesController {
 
   static async updateAnArticle(req, res) {
     const { id } = req.params;
-    const { title, body } = req.body;
+    const { title, description } = req.body;
 
     await Article.findOneAndUpdate(
       { articleId: id },
-      { title, body, updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A') }
+      { title, description, updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A') }
     );
     const updatedArticle = await Article.findOne({ articleId: id });
     return res.status(201).json({ updatedArticle, message: 'Article updated' });
