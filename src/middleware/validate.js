@@ -19,4 +19,10 @@ export default class validate {
       email: Joi.string().email(),
     }),
   });
+  static articles = celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      title: Joi.string().min(8).required(),
+      description: Joi.string().required(),
+    }),
+  });
 }
