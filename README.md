@@ -6,9 +6,6 @@ Rupiny-API is a backend blogging site that provides an API for managing blog pos
  git clone:git@github.com:mayangiaretha/rupiny-api.git
  cd rupiny-api
 
-
-cd rupiny
-
 ### `dependencies`
 npm run install
 
