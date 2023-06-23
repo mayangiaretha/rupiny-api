@@ -1,17 +1,18 @@
 # rupiny-api
 
-This is a blogging site.
+This is the blogging site.
 
 ### `installation`
-git clone https://git@github.com:mayangiaretha/rupiny.git
+ git clone:git@github.com:mayangiaretha/rupiny-api.git
+ add environment variables 
 
 cd rupiny
 
 ### `dependencies`
 npm run install
 
-###  `Runs on localhost:3000 by default`
-run npm start
+###  `Runs on App`
+run: npm run dev
 
 ## `Author`
 Mayangi Aretha
