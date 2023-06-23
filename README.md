@@ -12,7 +12,7 @@ Rupiny-API is a backend blogging site that provides an API for managing blog pos
 npm run install
 
 ###  `Run App`
-run: npm run dev
+npm run dev
 
 ## `Author`
 Mayangi Aretha
